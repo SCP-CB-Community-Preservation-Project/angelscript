@@ -409,8 +409,8 @@ enum asEFuncType
 
 typedef void (*asFUNCTION_t)();
 typedef void (*asGENFUNC_t)(asIScriptGeneric *);
-typedef void *(*asALLOCFUNC_t)(size_t);
-typedef void (*asFREEFUNC_t)(void *);
+typedef void *(__cdecl*asALLOCFUNC_t)(size_t);
+typedef void (__cdecl*asFREEFUNC_t)(void *);
 typedef void (*asCLEANENGINEFUNC_t)(asIScriptEngine *);
 typedef void (*asCLEANMODULEFUNC_t)(asIScriptModule *);
 typedef void (*asCLEANCONTEXTFUNC_t)(asIScriptContext *);
@@ -446,8 +446,10 @@ typedef void (*asJITFunction)(asSVMRegisters* registers, asPWORD jitArg);
 // check that the cast is really valid.
 // BCC v5.8 (C++Builder 2006) and earlier have a similar bug which forces us to fall back to a C-style cast.
 #define asFUNCTIONPR(f,p,r) asFunctionPtr((void (*)())((r (*)p)(f)))
+#define asFUNCTIONPRC(f,p,r,c) asFunctionPtr((void (c *)())((r (c *)p)(f)))
 #else
 #define asFUNCTIONPR(f,p,r) asFunctionPtr(reinterpret_cast<void (*)()>(static_cast<r (*)p>(f)))
+#define asFUNCTIONPRC(f,p,r,c) asFunctionPtr(reinterpret_cast<void (c *)()>(static_cast<r (c *)p>(f)))
 #endif
 
 #ifndef AS_NO_CLASS_METHODS
@@ -565,33 +567,33 @@ struct asSMessageInfo
 extern "C"
 {
 	// Engine
-	AS_API asIScriptEngine *asCreateScriptEngine(asDWORD version = ANGELSCRIPT_VERSION);
-	AS_API const char      *asGetLibraryVersion();
-	AS_API const char      *asGetLibraryOptions();
+	AS_API asIScriptEngine *__cdecl asCreateScriptEngine (asDWORD version = ANGELSCRIPT_VERSION);
+	AS_API const char      *__cdecl asGetLibraryVersion();
+	AS_API const char      *__cdecl asGetLibraryOptions();
 
 	// Context
-	AS_API asIScriptContext *asGetActiveContext();
+	AS_API asIScriptContext *__cdecl asGetActiveContext();
 
 	// Thread support
-	AS_API int               asPrepareMultithread(asIThreadManager *externalMgr = 0);
-	AS_API void              asUnprepareMultithread();
-	AS_API asIThreadManager *asGetThreadManager();
-	AS_API void              asAcquireExclusiveLock();
-	AS_API void              asReleaseExclusiveLock();
-	AS_API void              asAcquireSharedLock();
-	AS_API void              asReleaseSharedLock();
-	AS_API int               asAtomicInc(int &value);
-	AS_API int               asAtomicDec(int &value);
-	AS_API int               asThreadCleanup();
+	AS_API int               __cdecl asPrepareMultithread(asIThreadManager *externalMgr = 0);
+	AS_API void              __cdecl asUnprepareMultithread();
+	AS_API asIThreadManager *__cdecl asGetThreadManager();
+	AS_API void              __cdecl asAcquireExclusiveLock();
+	AS_API void              __cdecl asReleaseExclusiveLock();
+	AS_API void              __cdecl asAcquireSharedLock();
+	AS_API void              __cdecl asReleaseSharedLock();
+	AS_API int               __cdecl asAtomicInc(int &value);
+	AS_API int               __cdecl asAtomicDec(int &value);
+	AS_API int               __cdecl asThreadCleanup();
 
 	// Memory management
-	AS_API int   asSetGlobalMemoryFunctions(asALLOCFUNC_t allocFunc, asFREEFUNC_t freeFunc);
-	AS_API int   asResetGlobalMemoryFunctions();
-	AS_API void *asAllocMem(size_t size);
-	AS_API void  asFreeMem(void *mem);
+	AS_API int   __cdecl asSetGlobalMemoryFunctions(asALLOCFUNC_t allocFunc, asFREEFUNC_t freeFunc);
+	AS_API int   __cdecl asResetGlobalMemoryFunctions();
+	AS_API void *__cdecl asAllocMem(size_t size);
+	AS_API void  __cdecl asFreeMem(void *mem);
 
 	// Auxiliary
-	AS_API asILockableSharedBool *asCreateLockableSharedBool();
+	AS_API asILockableSharedBool *__cdecl asCreateLockableSharedBool();
 }
 #endif // ANGELSCRIPT_DLL_MANUAL_IMPORT
 

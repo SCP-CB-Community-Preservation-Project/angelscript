@@ -1358,6 +1358,9 @@
 	#endif
 #endif
 
+// B3D compat
+#undef AS_SIZEOF_BOOL
+#define AS_SIZEOF_BOOL 4
 
 //
 // Detect target hardware
