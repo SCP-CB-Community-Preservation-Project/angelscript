@@ -407,19 +407,19 @@ enum asEFuncType
 	#endif
 #endif
 
-typedef void (*asFUNCTION_t)();
-typedef void (*asGENFUNC_t)(asIScriptGeneric *);
+typedef void (__cdecl*asFUNCTION_t)();
+typedef void (__cdecl*asGENFUNC_t)(asIScriptGeneric *);
 typedef void *(__cdecl*asALLOCFUNC_t)(size_t);
 typedef void (__cdecl*asFREEFUNC_t)(void *);
-typedef void (*asCLEANENGINEFUNC_t)(asIScriptEngine *);
-typedef void (*asCLEANMODULEFUNC_t)(asIScriptModule *);
-typedef void (*asCLEANCONTEXTFUNC_t)(asIScriptContext *);
-typedef void (*asCLEANFUNCTIONFUNC_t)(asIScriptFunction *);
-typedef void (*asCLEANTYPEINFOFUNC_t)(asITypeInfo *);
-typedef void (*asCLEANSCRIPTOBJECTFUNC_t)(asIScriptObject *);
-typedef asIScriptContext *(*asREQUESTCONTEXTFUNC_t)(asIScriptEngine *, void *);
-typedef void (*asRETURNCONTEXTFUNC_t)(asIScriptEngine *, asIScriptContext *, void *);
-typedef void (*asCIRCULARREFFUNC_t)(asITypeInfo *, const void *, void *);
+typedef void (__cdecl*asCLEANENGINEFUNC_t)(asIScriptEngine *);
+typedef void (__cdecl*asCLEANMODULEFUNC_t)(asIScriptModule *);
+typedef void (__cdecl*asCLEANCONTEXTFUNC_t)(asIScriptContext *);
+typedef void (__cdecl*asCLEANFUNCTIONFUNC_t)(asIScriptFunction *);
+typedef void (__cdecl*asCLEANTYPEINFOFUNC_t)(asITypeInfo *);
+typedef void (__cdecl*asCLEANSCRIPTOBJECTFUNC_t)(asIScriptObject *);
+typedef asIScriptContext *(__cdecl*asREQUESTCONTEXTFUNC_t)(asIScriptEngine *, void *);
+typedef void (__cdecl*asRETURNCONTEXTFUNC_t)(asIScriptEngine *, asIScriptContext *, void *);
+typedef void (__cdecl*asCIRCULARREFFUNC_t)(asITypeInfo *, const void *, void *);
 
 struct asSVMRegisters;
 typedef void (*asJITFunction)(asSVMRegisters* registers, asPWORD jitArg);

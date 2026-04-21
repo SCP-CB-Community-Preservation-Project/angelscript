@@ -51,7 +51,7 @@ struct SArrayCache
 // through 1999 for this purpose, so we should be fine.
 const asPWORD ARRAY_CACHE = 1000;
 
-static void CleanupTypeInfoArrayCache(asITypeInfo *type)
+static void __cdecl CleanupTypeInfoArrayCache(asITypeInfo *type)
 {
 	SArrayCache *cache = reinterpret_cast<SArrayCache*>(type->GetUserData(ARRAY_CACHE));
 	if( cache )
